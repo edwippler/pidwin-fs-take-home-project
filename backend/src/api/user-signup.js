@@ -4,6 +4,7 @@ import User from "../models/user.js";
 
 const signup = async (req, res) => {
   const { email, password, confirmPassword, firstName, lastName } = req.body;
+  const signUpTokens = 100;
 
   try {
     const existingUser = await User.findOne({ email });
@@ -20,6 +21,7 @@ const signup = async (req, res) => {
       email,
       password: hashedPassword,
       name: `${firstName} ${lastName}`,
+      tokens: signUpTokens,
     });
     const token = jwt.sign(
       {
@@ -27,6 +29,7 @@ const signup = async (req, res) => {
         name: result.name,
         email: result.email,
         password: result.hashedPassword,
+        tokens: result.tokens,
       },
       "test",
       { expiresIn: "1h" }

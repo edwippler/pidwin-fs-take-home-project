@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Grow, Paper, Typography } from "@mui/material";
 import { jwtDecode } from "jwt-decode";
+import CoinToss from "../CoinToss/CoinToss";
 
 const Home = () => {
 
@@ -23,6 +24,9 @@ const Home = () => {
             </Typography>
           )}
         </Paper>
+        {isSingedIn !== "null" && isSingedIn !== null &&
+          <CoinToss />
+        }
       </Container>
     </Grow>
   );
